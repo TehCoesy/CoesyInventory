@@ -1,0 +1,102 @@
+#box{
+    height: 600px;
+    width: 600px;
+    margin:auto;
+    margin-top: 150px;
+    background-color: white;
+    position:relative;
+    box-sizing: border-box;
+    border:1px solid cyan;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 2px 4px 8px cyan;
+    
+}
+
+#signup{
+    position: absolute;
+    top :0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 40px;
+    width: 300px;
+    height: 600px;
+    
+    
+}
+#login{
+    position: absolute;
+    top :0;
+    right: 0;
+    box-sizing: border-box;
+    padding: 40px;
+    width: 300px;
+    height: 600px;
+    border-left: 1px solid cyan;
+    
+}
+body{
+    
+    margin: 0;
+    padding: 0;
+    background-image:url(./bg1.jpg) ;
+    background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+background-size: cover;
+}
+p{
+    font-size: 14px;
+    float: right;
+    margin-top:0;
+
+}
+h1{
+    text-align: center;
+    margin-top: 30px;
+}
+#or{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left:280px;
+    top:280px;
+    background: white;
+    text-align: center;
+    line-height: 40px;
+    font-weight: 600;
+    color: cyan;
+    
+}
+input[type="text"],
+input[type="password"]
+{
+    display:block;
+    box-sizing:border-box;
+    border:none;
+    margin-bottom: 20px;
+    padding: 4px;
+    width: 220px;
+    height: 32px;
+    border-bottom : 1px solid #aaa;
+    font-weight: 400;
+    font-size:15px;
+    transition: 0.2s ease;
+}
+input[type="submit"]
+{
+    margin-bottom: 28px;
+    width: 120px;
+    height: 32px;
+    border: none;
+    border-radius: 5px;
+    background: darkorange;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: 0.2 ease;
+    cursor: pointer;
+}
+input[type="submit"]:hover,input[type="submit"]:focus
+{
+    background: #00c8fa;
+    transition: 0.2s ease;
+}

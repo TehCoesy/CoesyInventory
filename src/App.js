@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import './App.css';
 import NotFound from './Components/NotFound';
-import Login from './Components/Login';
+import Home from './Components/Home';
 import RouteMaster from './Routes/RouteMaster';
 import { 
   BrowserRouter as Router,
@@ -12,9 +12,13 @@ import {
 
 export default class App extends PureComponent {
   render() {
-    Object.values(RouteMaster).map((values) => {
-      console.log(values);
-    });
+
+    //Debug: Print all Routes
+    //Object.values(RouteMaster).map((values) => {
+    //  console.log(values);
+    //});
+
+    //Switching Routes
     return (
       <Router>
         <Switch>
@@ -23,7 +27,7 @@ export default class App extends PureComponent {
               <Route exact={values.exact} path={values.path} component={values.component}/>
             ))
           }
-          <Route exact path='/login' component={Login}/>
+          <Route exact path='/' component={Home}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>
