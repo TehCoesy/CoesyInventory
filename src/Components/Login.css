@@ -1,3 +1,35 @@
+#hland{
+    margin-top: 200px;
+font-size: 48px;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+color: azure;
+-webkit-text-stroke: 1px darkgrey;
+-webkit-text-fill-color: azure;
+-webkit-animation: fill 0.5s infinite alternate;
+
+}
+
+#pland{
+    
+    font-size: 24px;
+    color: azure;
+    position: relative;
+    right: 670px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#btnland{
+    margin-top: 200px;
+    border-radius: 10px;
+    background-color: rgb(36, 195, 134);
+    
+    height: 40px;
+    width: 200px;
+    font-size: 25px;
+    position: relative;
+    left: 850px;
+    font-weight: 600;
+    color: whitesmoke;
+}
 #box{
     height: 600px;
     width: 600px;
@@ -6,9 +38,10 @@
     background-color: white;
     position:relative;
     box-sizing: border-box;
-    border:1px solid cyan;
+    border:1px solid rgb(0, 118, 148);
     font-family: Arial, Helvetica, sans-serif;
-    box-shadow: 2px 4px 8px cyan;
+    box-shadow: 2px 4px 8px rgb(0, 118, 148);
+    border-radius: 10px;
     
 }
 
@@ -31,14 +64,15 @@
     padding: 40px;
     width: 300px;
     height: 600px;
-    border-left: 1px solid cyan;
+    border-left: 1px solid rgb(0, 118, 148);
     
 }
 body{
+    justify-content: center;
     
     margin: 0;
     padding: 0;
-    background-image:url(./bg1.jpg) ;
+    background-image:url(../bg2.jpg) ;
     background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center; 
@@ -64,7 +98,7 @@ h1{
     text-align: center;
     line-height: 40px;
     font-weight: 600;
-    color: cyan;
+    color: rgb(0, 118, 148);
     
 }
 input[type="text"],
@@ -77,7 +111,7 @@ input[type="password"]
     padding: 4px;
     width: 220px;
     height: 32px;
-    border-bottom : 1px solid #aaa;
+    border-bottom : 1px solid rgb(0, 118, 148);
     font-weight: 400;
     font-size:15px;
     transition: 0.2s ease;
@@ -89,14 +123,15 @@ input[type="submit"]
     height: 32px;
     border: none;
     border-radius: 5px;
-    background: darkorange;
+    background: rgb(0, 118, 148);
     font-weight: 500;
     text-transform: uppercase;
     transition: 0.2 ease;
     cursor: pointer;
+    color: azure;
 }
 input[type="submit"]:hover,input[type="submit"]:focus
 {
-    background: #00c8fa;
+    background: #d65e5e;
     transition: 0.2s ease;
 }
