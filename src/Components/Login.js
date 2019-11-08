@@ -32,6 +32,10 @@ export default function Login() {
   function setUsername(value) {
     username = value;
   }
+  function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+  }
 
   return (
     //<div className="Login">
@@ -69,7 +73,10 @@ export default function Login() {
           <h2>Forgot password :</h2>
           <input type="text" name="forgot-username" placeholder="Username / Email"/>
           <br/>
-          <input type="submit" name="forgotpass" value="Comfirm"/>
+          <input type="submit" name="forgotpass" value="Comfirm" />
+          <div class="popup" onclick= {myFunction()}>Click me to toggle the popup!
+  <span class="popuptext" id="myPopup">A Simple Popup!</span>
+</div>
       </div>
       <div id="or">OR</div>
     </div>
