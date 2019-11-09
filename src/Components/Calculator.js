@@ -66,7 +66,7 @@ export default class Calculator extends React.Component {
                 <td><button type="button" name="button">.</button></td>
                 <td><button type="button" name="button"></button></td>
                 <td><button type="button" name="button"></button></td>
-                <td><button type="button" name="button" id="enter" onclick="onEnter()">=</button></td>
+                <td><button type="button" name="button" id="enter" >=</button></td>
                 </tr>
             </table>
         </div>

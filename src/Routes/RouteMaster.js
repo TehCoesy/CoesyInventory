@@ -28,6 +28,7 @@ export default {
         component: SamplePage,
         exact: true
     },
+    
     Home: {
         path: '/Home',
         component: Home,
