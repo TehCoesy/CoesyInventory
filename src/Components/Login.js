@@ -1,29 +1,33 @@
 import React from "react";
+import Authenticator from "../Servicers/Authenticator"
 import "./Login.css";
 
-export default class Login extends React.Component {
-  validateForm() {
-    return true;
+export default function Login(props) {
+  let loginUsername = "";
+  let loginPassword = "";
+
+  function validateForm() {
+    return loginPassword.length > 0 && loginUsername.length > 0;
   }
 
-  handleSubmit(event) {
+  function handleSubmit(event) {
   event.preventDefault();
-    if (this.validateForm()) {
-      this.props.history.push('/');
+    if (validateForm()) {
+      console.log("Validated!");
+      if (Authenticator(loginUsername, loginPassword)) {
+        props.userHasAuthenticated(true);
+      } else {
+        alert("Wrong email/password!");
+      }
     } else {
       alert("Invalid email/password!");
     }
   }
 
-  myFunction() {
-
-  }
-
-  render() {
-    return (
+  return (
       <div id="box">
         <div id="signup" >
-          <form onSubmit={(e) => {this.handleSubmit(e)}}>
+          <form >
             <h1 id="tsignup">Sign up</h1>
             <input type="text"  placeholder="Username / Email" />
             <br />
@@ -39,23 +43,24 @@ export default class Login extends React.Component {
           </form>
         </div>
         <div id="login">
-          <form>
+          <form onSubmit={e => {handleSubmit(e)}}>
             <h1>Login</h1>
-            <input type="text" name="login-username" placeholder="Usename / Email" />
+            <input type="text" name="login-username" placeholder="Usename / Email" onChange={e => {loginUsername=e.target.value}}/>
             <br />
-            <input type="password" name="login-password" placeholder="Password" />
+            <input type="password" name="login-password" placeholder="Password" onChange={(e) => {loginPassword=e.target.value}}/>
             <br/>
             <input type="submit" name="login-btn" value="Login" />
-            <br/>
+          </form>
+          <form>
+          <br/>
             <h2>Forgot password </h2>
             <input type="text" name="forgot-username" placeholder="Username / Email" />
             <br/>
             <input type="submit" name="forgotpass" value="Confirm" />
-            <div className="popup" onClick={this.myFunction()}>Click me to toggle the popup! </div>
+            <div className="popup">Click me to toggle the popup! </div>
             <span className="popuptext" id="myPopup">A Simple Popup!</span>
           </form>
         </div>
       </div>
       );
-  }  
 }

@@ -8,8 +8,26 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import AppliedRoutes from './Routes/AppliedRoutes';
 
 export default class App extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.userHasAuthenticated = this.userHasAuthenticated.bind(this);
+    this.state = {
+      isAuthenticated: false,
+      currentUser: null,
+      currentUserID: null
+    };
+  }
+
+  userHasAuthenticated(value) {
+    this.setState({
+      isAuthenticated: value
+    })
+    console.log(this.state.isAuthenticated);
+  }
+
   render() {
 
     //Debug: Print all Routes
@@ -23,10 +41,10 @@ export default class App extends PureComponent {
         <Switch>
           {
             Object.values(RouteMaster).map((values) => (
-              <Route exact={values.exact} path={values.path} component={values.component}/>
+              <AppliedRoutes exact={values.exact} path={values.path} component={values.component} myProps={this} />
             ))
           }
-          <Route exact path='/' component={Home}/>
+          <AppliedRoutes exact path='/' component={Home} myProps={this} />
           <Route component={NotFound}/>
         </Switch>
       </Router>
