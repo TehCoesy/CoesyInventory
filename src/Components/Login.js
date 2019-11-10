@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Authenticator from "../Servicers/Authenticator"
 import "./Login.css";
 
 export default function Login(props) {
-  let loginUsername = "";
-  let loginPassword = "";
+  const [loginUsername, setLoginUserName] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
   function validateForm() {
     return loginPassword.length > 0 && loginUsername.length > 0;
@@ -12,10 +12,13 @@ export default function Login(props) {
 
   function handleSubmit(event) {
   event.preventDefault();
+  console.log(loginUsername + " " + loginPassword)
     if (validateForm()) {
-      console.log("Validated!");
       if (Authenticator(loginUsername, loginPassword)) {
+        console.log("Validated!");
         props.userHasAuthenticated(true);
+        console.log(localStorage.getItem('isAuthenticated'));
+        props.history.push("/user");
       } else {
         alert("Wrong email/password!");
       }
@@ -43,13 +46,13 @@ export default function Login(props) {
           </form>
         </div>
         <div id="login">
-          <form onSubmit={e => {handleSubmit(e)}}>
+          <form onSubmit={e => handleSubmit(e)}>
             <h1>Login</h1>
-            <input type="text" name="login-username" placeholder="Usename / Email" onChange={e => {loginUsername=e.target.value}}/>
+            <input type="text" value={loginUsername} name="login-username" placeholder="Usename / Email" onChange={e => setLoginUserName(e.target.value)}/>
             <br />
-            <input type="password" name="login-password" placeholder="Password" onChange={(e) => {loginPassword=e.target.value}}/>
+            <input type="password" value={loginPassword} name="login-password" placeholder="Password" onChange={e => setLoginPassword(e.target.value)}/>
             <br/>
-            <input type="submit" name="login-btn" value="Login" />
+            <button type="submit">Login</button>
           </form>
           <form>
           <br/>

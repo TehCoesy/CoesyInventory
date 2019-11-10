@@ -14,18 +14,10 @@ export default class App extends PureComponent {
   constructor(props) {
     super(props);
     this.userHasAuthenticated = this.userHasAuthenticated.bind(this);
-    this.state = {
-      isAuthenticated: false,
-      currentUser: null,
-      currentUserID: null
-    };
   }
 
   userHasAuthenticated(value) {
-    this.setState({
-      isAuthenticated: value
-    })
-    console.log(this.state.isAuthenticated);
+    localStorage.setItem('isAuthenticated', true);
   }
 
   render() {
