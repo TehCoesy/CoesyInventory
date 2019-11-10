@@ -1,31 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import Authenticator from "../Servicers/Authenticator"
 import "./Login.css";
 
-export default class Login extends React.Component {
-  validateForm() {
-    return true;
+export default function Login(props) {
+  const [loginUsername, setLoginUserName] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  function validateForm() {
+    return loginPassword.length > 0 && loginUsername.length > 0;
   }
 
-  handleSubmit(event) {
+  function handleSubmit(event) {
   event.preventDefault();
-    if (this.validateForm()) {
-      this.props.history.push('/');
+  console.log(loginUsername + " " + loginPassword)
+    if (validateForm()) {
+      if (Authenticator(loginUsername, loginPassword)) {
+        console.log("Validated!");
+        props.userHasAuthenticated(true);
+        console.log(localStorage.getItem('isAuthenticated'));
+        props.history.push("/user");
+      } else {
+        alert("Wrong email/password!");
+      }
     } else {
       alert("Invalid email/password!");
     }
   }
 
-  myFunction() {
-
-  }
-
-  render() {
-    return (
-      <body id="login-body">
-      <div class="loginmom">
+  return (
       <div id="box">
         <div id="signup" >
-          <form onSubmit={(e) => {this.handleSubmit(e)}}>
+          <form >
             <h1 id="tsignup">Sign up</h1>
             <input type="text"  placeholder="Username / Email" />
             <br />
@@ -41,24 +46,24 @@ export default class Login extends React.Component {
           </form>
         </div>
         <div id="login">
-          <form>
+          <form onSubmit={e => handleSubmit(e)}>
             <h1>Login</h1>
-            <input type="text" name="login-username" placeholder="Usename / Email" />
+            <input type="text" value={loginUsername} name="login-username" placeholder="Usename / Email" onChange={e => setLoginUserName(e.target.value)}/>
             <br />
-            <input type="password" name="login-password" placeholder="Password" />
+            <input type="password" value={loginPassword} name="login-password" placeholder="Password" onChange={e => setLoginPassword(e.target.value)}/>
             <br/>
-            <button type="submit" id="login-btn">Login</button>
-            <br/>
+            <button type="submit">Login</button>
+          </form>
+          <form>
+          <br/>
             <h2>Forgot password </h2>
             <input type="text" name="forgot-username" placeholder="Username / Email" />
             <br/>
             <button type="submit" id="forgotpass-btn">Comfirm</button>
-            
           </form>
         </div>
       </div>
       </div>
       </body>
       );
-  }  
 }
