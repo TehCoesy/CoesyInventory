@@ -1,4 +1,15 @@
-#hland{
+#login-body{
+  background-image: url("./bg2.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 1080px;
+  min-width: 1900px;
+  margin:-20px;
+  padding-top: 150px;
+  
+}
+.loginmom #hland{
     margin-top: 200px;
 font-size: 48px;
 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -7,7 +18,7 @@ color: azure;
 -webkit-text-fill-color: azure;
 }
 
-#pland{
+.loginmom #pland{
     
     font-size: 24px;
     color: azure;
@@ -15,7 +26,7 @@ color: azure;
     right: 670px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-#btnland{
+.loginmom #btnland{
     margin-top: 200px;
     border-radius: 10px;
     background-color: rgb(36, 195, 134);
@@ -28,11 +39,24 @@ color: azure;
     font-weight: 600;
     color: whitesmoke;
 }
-#box{
+.loginmom{
+  height: 1080x;
+  width: 1920px;
+  
+    margin-left: -20px;
+    padding: 0;
+    
+    background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+background-size: cover;
+}
+
+.loginmom #box{
     height: 600px;
     width: 600px;
     margin:auto;
-    margin-top: 150px;
+    
     background-color: white;
     position:relative;
     box-sizing: border-box;
@@ -43,7 +67,7 @@ color: azure;
     
 }
 
-#signup{
+.loginmom #signup{
     position: absolute;
     top :0;
     left: 0;
@@ -54,7 +78,7 @@ color: azure;
     
     
 }
-#login{
+.loginmom #login{
     position: absolute;
     top :0;
     right: 0;
@@ -65,28 +89,25 @@ color: azure;
     border-left: 1px solid rgb(0, 118, 148);
     
 }
-body{
-    justify-content: center;
-    
-    margin: 0;
-    padding: 0;
-    background-image:url(../bg2.jpg) ;
-    background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center; 
-background-size: cover;
-}
-p{
+.loginmom .bodylogin{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #d65e5e;
+
+    }
+.loginmom p{
     font-size: 14px;
     float: right;
     margin-top:0;
 
 }
-h1{
+.loginmom h1{
     text-align: center;
     margin-top: 30px;
 }
-#or{
+.loginmom #or{
     position: absolute;
     width: 40px;
     height: 40px;
@@ -99,8 +120,10 @@ h1{
     color: rgb(0, 118, 148);
     
 }
-input[type="text"],
-input[type="password"]
+.loginmom input[type="text"],
+.loginmom input[type="password"]
+
+
 {
     display:block;
     box-sizing:border-box;
@@ -114,7 +137,11 @@ input[type="password"]
     font-size:15px;
     transition: 0.2s ease;
 }
-#signupbtn
+.loginmom #signup-btn
+{
+  margin-top: 25px;
+}
+.loginmom #signup-btn,.loginmom #login-btn,.loginmom #forgotpass-btn
 {
     margin-bottom: 28px;
     width: 120px;
@@ -127,64 +154,10 @@ input[type="password"]
     transition: 0.2 ease;
     cursor: pointer;
     color: azure;
+    
 }
-input[type="submit"]:hover,input[type="submit"]:focus
+.loginmom button[type="submit"]:hover,.loginmom button[type="submit"]:focus
 {
     background: #d65e5e;
     transition: 0.2s ease;
 }
-.popup {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  /* The actual popup */
-  .popup .popuptext {
-    visibility: hidden;
-    width: 160px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -80px;
-  }
-  
-  /* Popup arrow */
-  .popup .popuptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-  }
-  
-  /* Toggle this class - hide and show the popup */
-  .popup .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s;
-  }
-  
-  /* Add animation (fade in the popup) */
-  @-webkit-keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 1;}
-  }
-  
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
-  }

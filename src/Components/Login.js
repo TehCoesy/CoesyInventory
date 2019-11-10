@@ -21,6 +21,8 @@ export default class Login extends React.Component {
 
   render() {
     return (
+      <body id="login-body">
+      <div class="loginmom">
       <div id="box">
         <div id="signup" >
           <form onSubmit={(e) => {this.handleSubmit(e)}}>
@@ -35,7 +37,7 @@ export default class Login extends React.Component {
             <br/>
             <input type="checkbox" value="agree" /> 
             <p> Agree with the terms of service </p>
-            <button type="submit" id="signupbtn">Sign up!</button>
+            <button type="submit" id="signup-btn">Sign up!</button>
           </form>
         </div>
         <div id="login">
@@ -45,17 +47,18 @@ export default class Login extends React.Component {
             <br />
             <input type="password" name="login-password" placeholder="Password" />
             <br/>
-            <input type="submit" name="login-btn" value="Login" />
+            <button type="submit" id="login-btn">Login</button>
             <br/>
             <h2>Forgot password </h2>
             <input type="text" name="forgot-username" placeholder="Username / Email" />
             <br/>
-            <input type="submit" name="forgotpass" value="Confirm" />
-            <div className="popup" onClick={this.myFunction()}>Click me to toggle the popup! </div>
-            <span className="popuptext" id="myPopup">A Simple Popup!</span>
+            <button type="submit" id="forgotpass-btn">Comfirm</button>
+            
           </form>
         </div>
       </div>
+      </div>
+      </body>
       );
   }  
 }
