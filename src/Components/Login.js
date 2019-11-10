@@ -42,7 +42,7 @@ export default function Login(props) {
             <br/>
             <input type="checkbox" value="agree" /> 
             <p> Agree with the terms of service </p>
-            <button type="submit" id="signupbtn">Sign up!</button>
+            <button type="submit" id="signup-btn">Sign up!</button>
           </form>
         </div>
         <div id="login">
@@ -59,11 +59,11 @@ export default function Login(props) {
             <h2>Forgot password </h2>
             <input type="text" name="forgot-username" placeholder="Username / Email" />
             <br/>
-            <input type="submit" name="forgotpass" value="Confirm" />
-            <div className="popup">Click me to toggle the popup! </div>
-            <span className="popuptext" id="myPopup">A Simple Popup!</span>
+            <button type="submit" id="forgotpass-btn">Comfirm</button>
           </form>
         </div>
       </div>
+      </div>
+      </body>
       );
 }
