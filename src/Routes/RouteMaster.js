@@ -5,6 +5,7 @@ import SamplePage from '../Components/SamplePage';
 import Home from '../Components/Home';
 import page1 from '../Components/page1';
 
+
 export default {
     login: {
         path: '/login',
@@ -36,8 +37,9 @@ export default {
         exact: true
     },
     page1: {
-        path: '/page1',
+        path: '/test',
         component: page1,
         exact: true
     },
+  
 }
