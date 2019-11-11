@@ -3,6 +3,7 @@ import InventoryManagement from '../Components/InventoryManagement';
 import TicTacToe from '../Components/TicTacToe';
 import SamplePage from '../Components/SamplePage';
 import Home from '../Components/Home';
+import page1 from '../Components/page1';
 
 export default {
     login: {
@@ -32,6 +33,11 @@ export default {
     Home: {
         path: '/Home',
         component: Home,
+        exact: true
+    },
+    page1: {
+        path: '/page1',
+        component: page1,
         exact: true
     },
 }
