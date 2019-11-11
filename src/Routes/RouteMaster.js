@@ -45,7 +45,7 @@ export default {
     user:
     {
         path: '/user',
-        component: user,
+        component: User,
         exact: true
     },
     test: {
