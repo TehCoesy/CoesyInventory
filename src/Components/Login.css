@@ -1,5 +1,5 @@
-#login-body{
-  background-image: url("./bg2.jpg");
+.login_div {
+  background-image: url("../Resources/bg2.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -9,7 +9,7 @@
   padding-top: 150px;
   
 }
-.loginmom #hland{
+.login_div #hland{
     margin-top: 200px;
 font-size: 48px;
 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -18,7 +18,7 @@ color: azure;
 -webkit-text-fill-color: azure;
 }
 
-.loginmom #pland{
+.login_div #pland{
     
     font-size: 24px;
     color: azure;
@@ -26,7 +26,8 @@ color: azure;
     right: 670px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-.loginmom #btnland{
+
+.login_div #btnland{
     margin-top: 200px;
     border-radius: 10px;
     background-color: rgb(36, 195, 134);

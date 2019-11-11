@@ -28,10 +28,10 @@ export default function Login(props) {
   }
 
   return (
-      <div id="box">
-        <div id="signup" >
+      <div className="login_div">
+        <div className="signup_div" >
           <form >
-            <h1 id="tsignup">Sign up</h1>
+            <h1 id="l_signup">Sign up</h1>
             <input type="text"  placeholder="Username / Email" />
             <br />
             <input type="text" placeholder="Email" />
@@ -42,10 +42,10 @@ export default function Login(props) {
             <br/>
             <input type="checkbox" value="agree" /> 
             <p> Agree with the terms of service </p>
-            <button type="submit" id="signup-btn">Sign up!</button>
+            <button type="submit" id="btn_signup">Sign up!</button>
           </form>
         </div>
-        <div id="login">
+        <div className="login_div">
           <form onSubmit={e => handleSubmit(e)}>
             <h1>Login</h1>
             <input type="text" value={loginUsername} name="login-username" placeholder="Usename / Email" onChange={e => setLoginUserName(e.target.value)}/>
@@ -54,8 +54,10 @@ export default function Login(props) {
             <br/>
             <button type="submit">Login</button>
           </form>
+        </div>
+        <div className="forgot_div">
           <form>
-          <br/>
+            <br/>
             <h2>Forgot password </h2>
             <input type="text" name="forgot-username" placeholder="Username / Email" />
             <br/>
@@ -63,7 +65,5 @@ export default function Login(props) {
           </form>
         </div>
       </div>
-      </div>
-      </body>
       );
 }
