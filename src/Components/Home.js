@@ -1,7 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-
-
+import "./Home.css";
 export default class Home extends React.Component {
     openLogin(e) {
         e.preventDefault();

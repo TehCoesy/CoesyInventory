@@ -4,6 +4,7 @@ import TicTacToe from '../Components/TicTacToe';
 import SamplePage from '../Components/SamplePage';
 import Home from '../Components/Home';
 import page1 from '../Components/page1';
+import User from '../Components/User';
 
 
 export default {
@@ -31,8 +32,8 @@ export default {
         exact: true
     },
     
-    Home: {
-        path: '/Home',
+    home: {
+        path: '/home',
         component: Home,
         exact: true
     },
@@ -41,5 +42,13 @@ export default {
         component: page1,
         exact: true
     },
+<<<<<<< HEAD
   
+=======
+    user: {
+        path: '/user',
+        component: User,
+        exact: true
+    }
+>>>>>>> 4573269d6193387ed36f13a51eece14894e102e7
 }
