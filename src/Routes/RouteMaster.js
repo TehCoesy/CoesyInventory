@@ -6,6 +6,7 @@ import Home from '../Components/Home';
 import page1 from '../Components/page1';
 import User from '../Components/User';
 
+
 export default {
     login: {
         path: '/login',
@@ -37,13 +38,17 @@ export default {
         exact: true
     },
     page1: {
-        path: '/page1',
+        path: '/test',
         component: page1,
         exact: true
     },
+<<<<<<< HEAD
+  
+=======
     user: {
         path: '/user',
         component: User,
         exact: true
     }
+>>>>>>> 4573269d6193387ed36f13a51eece14894e102e7
 }
