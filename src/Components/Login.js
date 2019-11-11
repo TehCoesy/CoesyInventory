@@ -2,6 +2,16 @@ import React from "react";
 import "./Login.css";
 
 export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false
+    };
+  }
+
+  handleClick() {
+    this.setState({ visible: !this.state.visible });
+  }
   validateForm() {
     return true;
   }
@@ -14,14 +24,9 @@ export default class Login extends React.Component {
       alert("Invalid email/password!");
     }
   }
-
-  myFunction() {
-
-  }
-
   render() {
     return (
-      <body id="login-body">
+      
       <div class="loginmom">
       <div id="box">
         <div id="signup" >
@@ -36,10 +41,19 @@ export default class Login extends React.Component {
             <input type="password" placeholder="Confirm password" />
             <br/>
             <input type="checkbox" value="agree" /> 
-            <p> Agree with the terms of service </p>
+            <p class="popup" onClick={this.handleClick.bind(this)}>
+            Agree with the terms of service
+          <span
+          
+            class={`popuptext ${this.state.visible ? "show" : null}`}
+            id="myPopup"
+          >
+            this is simple terms of service
+          </span></p>
             <button type="submit" id="signup-btn">Sign up!</button>
           </form>
         </div>
+        <div id="or">OR</div>
         <div id="login">
           <form>
             <h1>Login</h1>
@@ -52,13 +66,12 @@ export default class Login extends React.Component {
             <h2>Forgot password </h2>
             <input type="text" name="forgot-username" placeholder="Username / Email" />
             <br/>
-            <button type="submit" id="forgotpass-btn">Comfirm</button>
+            <button type="submit" id="forgotpass-btn">Confirm</button>
             
           </form>
         </div>
       </div>
       </div>
-      </body>
       );
   }  
 }

@@ -5,6 +5,7 @@ import SamplePage from '../Components/SamplePage';
 import Home from '../Components/Home';
 import page1 from '../Components/page1';
 
+
 export default {
     login: {
         path: '/login',
@@ -40,4 +41,11 @@ export default {
         component: page1,
         exact: true
     },
+    user:
+    {
+        path: '/user',
+        component: user,
+        exact: true
+    }
+  
 }
