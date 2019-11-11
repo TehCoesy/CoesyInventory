@@ -5,6 +5,7 @@ import "./Login.css";
 export default function Login(props) {
   const [loginUsername, setLoginUserName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const visible = false;
 
   function validateForm() {
     return loginPassword.length > 0 && loginUsername.length > 0;
@@ -27,10 +28,13 @@ export default function Login(props) {
     }
   }
 
+  function handlePopup() {
+
+  }
+
   return (
-      <div id="box">
+      <div className="loginmom">
         <div id="signup" >
->>>>>>> e3445f1bc0bc9534c08abe91f4ae2ac2407ed309
           <form >
             <h1 id="l_signup">Sign up</h1>
             <input type="text"  placeholder="Username / Email" />
@@ -42,11 +46,11 @@ export default function Login(props) {
             <input type="password" placeholder="Confirm password" />
             <br/>
             <input type="checkbox" value="agree" /> 
-            <p class="popup" onClick={this.handleClick.bind(this)}>
+            <p class="popup" onClick={handlePopup}>
             Agree with the terms of service
           <span
           
-            class={`popuptext ${this.state.visible ? "show" : null}`}
+            class={`popuptext ${visible ? "show" : null}`}
             id="myPopup"
           >
             this is simple terms of service
