@@ -56,22 +56,18 @@ background-size: cover;
 .loginmom #box{
     height: 600px;
     width: 600px;
-    margin:auto;
-    
     background-color: white;
-    position:relative;
     box-sizing: border-box;
     border:1px solid rgb(0, 118, 148);
-    font-family: Arial, Helvetica, sans-serif;
+    
     box-shadow: 2px 4px 8px rgb(0, 118, 148);
     border-radius: 10px;
+    display: flex;
+    position: relative;
     
 }
 
 .loginmom #signup{
-    position: absolute;
-    top :0;
-    left: 0;
     box-sizing: border-box;
     padding: 40px;
     width: 300px;
@@ -80,14 +76,12 @@ background-size: cover;
     
 }
 .loginmom #login{
-    position: absolute;
     top :0;
     right: 0;
     box-sizing: border-box;
     padding: 40px;
     width: 300px;
     height: 600px;
-    border-left: 1px solid rgb(0, 118, 148);
     
 }
 .loginmom .bodylogin{
@@ -112,15 +106,31 @@ background-size: cover;
     position: absolute;
     width: 40px;
     height: 40px;
-    left:280px;
-    top:280px;
     background: white;
     text-align: center;
     line-height: 40px;
     font-weight: 600;
     color: rgb(0, 118, 148);
+    align-self: stretch;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr max-content 1fr;
+    justify-content: center;
+    justify-items: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     
 }
+
+#or::after,
+#or::before {
+  content: "";
+  display: block;
+  width: 1px;
+  background-color: rgb(0, 118, 148);
+}
+
 .loginmom input[type="text"],
 .loginmom input[type="password"]
 
@@ -138,11 +148,8 @@ background-size: cover;
     font-size:15px;
     transition: 0.2s ease;
 }
-.loginmom #signup-btn
-{
-  margin-top: 25px;
-}
-.loginmom #signup-btn,.loginmom #login-btn,.loginmom #forgotpass-btn
+
+.loginmom button
 {
     margin-bottom: 28px;
     width: 120px;
@@ -156,9 +163,65 @@ background-size: cover;
     cursor: pointer;
     color: azure;
     
+    
 }
 .loginmom button[type="submit"]:hover,.loginmom button[type="submit"]:focus
 {
     background: #d65e5e;
     transition: 0.2s ease;
 }
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* The actual popup */
+  .popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+  }
+  
+  /* Popup arrow */
+  .popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  /* Toggle this class - hide and show the popup */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+  }
+  
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }

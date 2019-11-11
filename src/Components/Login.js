@@ -28,8 +28,9 @@ export default function Login(props) {
   }
 
   return (
-      <div className="login_div">
-        <div className="signup_div" >
+      <div id="box">
+        <div id="signup" >
+>>>>>>> e3445f1bc0bc9534c08abe91f4ae2ac2407ed309
           <form >
             <h1 id="l_signup">Sign up</h1>
             <input type="text"  placeholder="Username / Email" />
@@ -41,11 +42,20 @@ export default function Login(props) {
             <input type="password" placeholder="Confirm password" />
             <br/>
             <input type="checkbox" value="agree" /> 
-            <p> Agree with the terms of service </p>
-            <button type="submit" id="btn_signup">Sign up!</button>
+            <p class="popup" onClick={this.handleClick.bind(this)}>
+            Agree with the terms of service
+          <span
+          
+            class={`popuptext ${this.state.visible ? "show" : null}`}
+            id="myPopup"
+          >
+            this is simple terms of service
+          </span></p>
+            <button type="submit" id="signup-btn">Sign up!</button>
           </form>
         </div>
-        <div className="login_div">
+        <div id="or">OR</div>
+        <div id="login">
           <form onSubmit={e => handleSubmit(e)}>
             <h1>Login</h1>
             <input type="text" value={loginUsername} name="login-username" placeholder="Usename / Email" onChange={e => setLoginUserName(e.target.value)}/>

@@ -1,0 +1,14 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+}
+
+
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+
+}
