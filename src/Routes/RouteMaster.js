@@ -38,17 +38,19 @@ export default {
         exact: true
     },
     page1: {
+        path: '/page1',
+        component: page1,
+        exact: true
+    },
+    user:
+    {
+        path: '/user',
+        component: User,
+        exact: true
+    },
+    test: {
         path: '/test',
         component: page1,
         exact: true
     },
-<<<<<<< HEAD
-  
-=======
-    user: {
-        path: '/user',
-        component: User,
-        exact: true
-    }
->>>>>>> 4573269d6193387ed36f13a51eece14894e102e7
 }
