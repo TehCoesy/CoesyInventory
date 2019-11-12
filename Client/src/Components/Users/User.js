@@ -1,9 +1,7 @@
 import React from 'react'
 import  './User.css'
 
-export default class User extends React.Component {
-   
-    render() {
+export default function User() {
         return (
             <div id="user-body">
                 {localStorage.getItem('isAuthenticated') ? console.log("Logged in") : console.log("Logged out")}
@@ -13,8 +11,8 @@ export default class User extends React.Component {
                         <input id="nameuser-type" type="name" name="name" required/>
                         
                         <div id="avatar1">
-                       <span><img id="avatar-bg" src={require('./avatarbg.jpg')}/></span>
-                        <div id="avatar-full"><img id="avatar-bg1" src={require('./avatarbg.jpg')}/></div>
+                       <span><img id="avatar-bg" src={require('../avatarbg.jpg')}/></span>
+                        <div id="avatar-full"><img id="avatar-bg1" src={require('../avatarbg.jpg')}/></div>
                         
                         </div>
                          <p id="note-avatar">* Avatar picture must be a square image.</p>
@@ -44,10 +42,8 @@ export default class User extends React.Component {
                         <button id="save-btn">Save and exit</button>
                             </form>
                         </div>
-                        
                     </div>
                 </div>
             </div>
         );
-    }
 }

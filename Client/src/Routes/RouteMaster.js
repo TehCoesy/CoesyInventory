@@ -4,6 +4,7 @@ import TicTacToe from '../Components/Extra/TicTacToe';
 import SamplePage from '../Components/Extra/SamplePage';
 import Home from '../Components/Common/Home';
 import page1 from '../Components/Users/page1';
+import User from '../Components/Users/User';
 
 export default {
     login: {
@@ -45,4 +46,9 @@ export default {
         component: page1,
         exact: true
     },
+    user: {
+        path: '/user',
+        component: User,
+        exact: true
+    }
 }
