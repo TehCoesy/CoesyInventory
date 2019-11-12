@@ -1,11 +1,9 @@
-import Login from '../Components/Login';
-import InventoryManagement from '../Components/InventoryManagement';
-import TicTacToe from '../Components/TicTacToe';
-import SamplePage from '../Components/SamplePage';
-import Home from '../Components/Home';
-import page1 from '../Components/page1';
-import User from '../Components/User';
-
+import Login from '../Components/Common/Login';
+import InventoryManagement from '../Components/Users/InventoryManagement';
+import TicTacToe from '../Components/Extra/TicTacToe';
+import SamplePage from '../Components/Extra/SamplePage';
+import Home from '../Components/Common/Home';
+import page1 from '../Components/Users/page1';
 
 export default {
     login: {
@@ -40,12 +38,6 @@ export default {
     page1: {
         path: '/page1',
         component: page1,
-        exact: true
-    },
-    user:
-    {
-        path: '/user',
-        component: User,
         exact: true
     },
     test: {

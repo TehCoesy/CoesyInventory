@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Authenticator from "../Servicers/Authenticator"
+import Authenticator from "../../Servicers/Authenticator"
 import "./Login.css";
 
 export default function Login(props) {
@@ -17,9 +17,6 @@ export default function Login(props) {
     if (validateForm()) {
       if (Authenticator(loginUsername, loginPassword)) {
         console.log("Validated!");
-        props.userHasAuthenticated(true);
-        console.log(localStorage.getItem('isAuthenticated'));
-        props.history.push("/user");
       } else {
         alert("Wrong email/password!");
       }
@@ -46,11 +43,11 @@ export default function Login(props) {
             <input type="password" placeholder="Confirm password" />
             <br/>
             <input type="checkbox" value="agree" /> 
-            <p class="popup" onClick={handlePopup}>
+            <p className="popup" onClick={handlePopup}>
             Agree with the terms of service
           <span
           
-            class={`popuptext ${visible ? "show" : null}`}
+            className={`popuptext ${visible ? "show" : null}`}
             id="myPopup"
           >
             this is simple terms of service
