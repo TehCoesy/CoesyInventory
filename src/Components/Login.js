@@ -35,7 +35,6 @@ export default function Login(props) {
   return (
       <div className="loginmom">
         <div id="box">
-        <div id="signup" >
           <form >
             <h1 id="l_signup">Sign up</h1>
             <input type="text"  placeholder="Username / Email" />
@@ -76,7 +75,6 @@ export default function Login(props) {
             
           </form>
         </div>
-      </div>
       </div>
       );
 }
