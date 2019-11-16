@@ -17,6 +17,9 @@ export default function Login(props) {
     if (validateForm()) {
       if (Authenticator(loginUsername, loginPassword)) {
         console.log("Validated!");
+        props.userHasAuthenticated(true);
+        console.log(localStorage.getItem('isAuthenticated'));
+        props.history.push("/user");
       } else {
         alert("Wrong email/password!");
       }
@@ -32,6 +35,7 @@ export default function Login(props) {
   return (
       <div className="loginmom">
         <div id="box">
+        <div id="signup" >
           <form >
             <h1 id="l_signup">Sign up</h1>
             <input type="text"  placeholder="Username / Email" />
@@ -43,11 +47,11 @@ export default function Login(props) {
             <input type="password" placeholder="Confirm password" />
             <br/>
             <input type="checkbox" value="agree" /> 
-            <p className="popup" onClick={handlePopup}>
+            <p class="popup" onClick={handlePopup}>
             Agree with the terms of service
           <span
           
-            className={`popuptext ${visible ? "show" : null}`}
+            class={`popuptext ${visible ? "show" : null}`}
             id="myPopup"
           >
             this is simple terms of service
@@ -72,6 +76,7 @@ export default function Login(props) {
             
           </form>
         </div>
+      </div>
       </div>
       );
 }
