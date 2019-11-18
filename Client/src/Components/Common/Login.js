@@ -1,32 +1,55 @@
 import React, { useState } from "react";
-import Authenticator from "../../Servicers/Authenticator"
 import "./Login.css";
+import { useAuth } from '../../Context/authContext';
 
 export default function Login(props) {
   const [loginUsername, setLoginUserName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const visible = false;
+  const authToken = useAuth();
+  
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (validateForm) {
+      processLogin();
+      authToken.setAuthToken("haha");
+    } else {
+      alert("Invalid form! Please check for errors");
+    }
+  }
 
   function validateForm() {
     return loginPassword.length > 0 && loginUsername.length > 0;
   }
 
-  function handleSubmit(event) {
-  event.preventDefault();
-  console.log(loginUsername + " " + loginPassword)
-    if (validateForm()) {
-      if (Authenticator(loginUsername, loginPassword)) {
-        console.log("Validated!");
-        props.userHasAuthenticated(true);
-        console.log(localStorage.getItem('isAuthenticated'));
-        props.history.push("/user");
-      } else {
-        alert("Wrong email/password!");
-      }
-    } else {
-      alert("Invalid email/password!");
+  async function processLogin() {
+    const url = 'http://localhost:5000/auth/login';
+    const options = {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: "admin",
+        password: "root"
+      })
     }
-  }
+
+    await fetch('http://localhost:5000/express_backend')
+      .then(response => response.json())
+      .then(response => {
+        console.log(response.express);
+      })
+
+    await fetch(url, options)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        alert(response.message);
+     })
+  } 
 
   function handlePopup() {
 
