@@ -17,6 +17,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const authRoutes = require('./Routes/auth');
 app.use('/auth', authRoutes);
 
+// register Routes
+const regRoutes = require('./Routes/register');
+app.use('/register', regRoutes);
+
+// inventory Routes
+//const inventoryRoutes = require('./Routes/inventory');
+//app.use('/inventory', inventoryRoutes);
+
 app.get('/express_backend', (req, res) => {
     res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
 });

@@ -1,49 +1,56 @@
 const express = require('express');
+const mydb = require('../Middleware/myDB');
+const mysql = require('mysql');
 
 const router = new express.Router();
 
-function validateLoginForm(payload) {
-    const errors = {};
-    let isFormValid = true;
-    let message = "";
+//Assume Front-end handled login info validation.
 
-    if (!payload || typeof payload.email !== 'string' || payload.email.trim().length === 0) {
-        isFormValid = false;
-        errors.email = 'Please provide a Username / Email address';
+function getRandomToken(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
+    return result;
+}
 
-    if (!payload || typeof payload.password !== 'string' || payload.password.trim().length === 0) {
-        isFormValid = false;
-        errors.password = 'Please provide a password';
-    }
+function handleLogin(user, given_pass, saved_pass) {
+    console.log(user);
+    console.log(given_pass);
+    console.log(saved_pass);
 
-    if (!isFormValid) {
-        message = 'Check form for errors';
+    if (given_pass == saved_pass) {
+        return true;
     } else {
-        message = 'Credentials validated';
-    }
-
-    return {
-        success: isFormValid,
-        message,
-        errors
+        return false;
     }
 }
 
-router.post('/login', (req, res) => {
-    console.log(req.body);
-    const validationResult = validateLoginForm(req.body);
-    if (!validationResult.success) {
+router.post('/login', async function(req, res) {
+    let queryBody = "SELECT * FROM Users WHERE userName = " + mysql.escape(req.body.user);
+    //let queryArgs = [[req.user]];
+    await mydb.query(queryBody)
+    .then(function(result) {
+        if (handleLogin(result[0].userName, req.body.password, result[0].password)) {
+            newToken = getRandomToken(10);
+            return res.status(200).json({
+                success: true,
+                message: "Successful Login.",
+                myToken: newToken 
+            });
+        } else {
+            return res.status(400).json({
+                success: false,
+                message: "Incorrect Credentials."
+            })  
+        }
+    }, function(err) {
         return res.status(400).json({
             success: false,
-            message: validationResult.message,
-            errors: validationResult.errors
-        })
-    }
-
-    return res.status(200).json({
-        success: true,
-        message: validationResult.message
+            message: error_Message
+        })  
     });
 });
 

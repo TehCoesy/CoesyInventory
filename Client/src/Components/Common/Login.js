@@ -3,23 +3,31 @@ import "./Login.css";
 import { useAuth } from '../../Context/authContext';
 
 export default function Login(props) {
+  //Login Form
   const [loginUsername, setLoginUserName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+
+  //Register Form
+  const [registerUsername, setRegisterUserName] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+
   const visible = false;
   const authToken = useAuth();
   
-
-  function handleSubmit(event) {
+  //Login
+  function handleLoginSubmit(event) {
     event.preventDefault();
-    if (validateForm) {
+    if (validateLoginForm()) {
       processLogin();
-      authToken.setAuthToken("haha");
     } else {
       alert("Invalid form! Please check for errors");
     }
   }
 
-  function validateForm() {
+  function validateLoginForm() {
     return loginPassword.length > 0 && loginUsername.length > 0;
   }
 
@@ -32,42 +40,94 @@ export default function Login(props) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: "admin",
-        password: "root"
+        user: loginUsername,
+        password: loginPassword
       })
     }
 
-    await fetch('http://localhost:5000/express_backend')
+    await fetch(url, options)
       .then(response => response.json())
       .then(response => {
-        console.log(response.express);
+        console.log(response);
+
+        if (response.success) {
+          localStorage.setItem('authToken', response.myToken);
+        }
+        
+        alert(response.message);
+    })
+  } 
+
+  //Register
+  function handleRegisterSubmit(event) {
+    event.preventDefault();
+    if (validateRegisterForm()) {
+      processRegister()
+    } else {
+      alert("Invalid Register Form!");
+    }
+  }
+
+  function validateRegisterForm() {
+    var registerValid = true;
+    if (registerUsername.length <= 0) {
+      registerValid = false;
+    }
+    if (registerPassword.length <= 0) {
+      registerValid = false;
+    }
+    if (registerEmail <= 0) {
+      registerValid = false;
+    }
+    if (confirmPassword <= 0 || confirmPassword !== registerPassword) {
+      registerValid = false;
+    }
+
+    return registerValid;
+  }
+
+  async function processRegister() {
+    const url = 'http://localhost:5000/register/new_acc';
+    const options = {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        regUsername: registerUsername,
+        regPassword: registerPassword,
+        regEmail: registerEmail
       })
+    }
 
     await fetch(url, options)
       .then(response => response.json())
       .then(response => {
         console.log(response);
         alert(response.message);
-     })
-  } 
+    })
+  }
 
+  //Popup
   function handlePopup() {
 
   }
 
+  //Render
   return (
       <div className="loginmom">
         <div id="box">
         <div id="signup" >
           <form >
             <h1 id="l_signup">Sign up</h1>
-            <input type="text"  placeholder="Username / Email" />
+            <input type="text"  placeholder="Username" value={registerUsername} onChange={e => setRegisterUserName(e.target.value)}/>
             <br />
-            <input type="text" placeholder="Email" />
+            <input type="text" placeholder="Email" value={registerEmail} onChange={e => setRegisterEmail(e.target.value)}/>
             <br />
-            <input type="password" placeholder="Password" />
+            <input type="password" placeholder="Password" value={registerPassword} onChange={e => setRegisterPassword(e.target.value)}/>
             <br/>
-            <input type="password" placeholder="Confirm password" />
+            <input type="password" placeholder="Confirm password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}/>
             <br/>
             <input type="checkbox" value="agree" /> 
             <p class="popup" onClick={handlePopup}>
@@ -79,12 +139,12 @@ export default function Login(props) {
           >
             this is simple terms of service
           </span></p>
-            <button type="submit" id="signup-btn">Sign up!</button>
+            <button id="signup-btn" onClick={handleRegisterSubmit}>Sign up!</button>
           </form>
         </div>
         <div id="or">OR</div>
         <div id="login">
-          <form onSubmit={e => handleSubmit(e)}>
+          <form onSubmit={e => handleLoginSubmit(e)}>
             <h1>Login</h1>
             <input type="text" value={loginUsername} name="login-username" placeholder="Usename / Email" onChange={e => setLoginUserName(e.target.value)}/>
             <br />
@@ -96,7 +156,6 @@ export default function Login(props) {
             <input type="text" name="forgot-username" placeholder="Username / Email" />
             <br/>
             <button type="submit" id="forgotpass-btn">Confirm</button>
-            
           </form>
         </div>
       </div>
