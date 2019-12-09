@@ -4,15 +4,15 @@ import  './User.css'
 export default function User() {
         return (
             <div id="user-body">
-                {localStorage.getItem('isAuthenticated') ? console.log("Logged in") : console.log("Logged out")}
+                {localStorage.getItem('authToken') ? console.log("Logged in") : console.log("Logged out")}
                 <div id="user-box">
                     <div id="name-user">
                         <h3 id="nameuser">Name user :</h3>
                         <input id="nameuser-type" type="name" name="name" required/>
                         
                         <div id="avatar1">
-                       <span><img id="avatar-bg" src={require('../avatarbg.jpg')}/></span>
-                        <div id="avatar-full"><img id="avatar-bg1" src={require('../avatarbg.jpg')}/></div>
+                       <span><img id="avatar-bg" src={require('../../Resources/avatarbg.jpg')} alt="Avatar-BG"/></span>
+                        <div id="avatar-full"><img id="avatar-bg1" src={require('../../Resources/avatarbg.jpg')} alt="Avatar-Full"/></div>
                         
                         </div>
                          <p id="note-avatar">* Avatar picture must be a square image.</p>

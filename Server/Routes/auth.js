@@ -33,6 +33,20 @@ router.post('/login', async function(req, res) {
     //let queryArgs = [[req.user]];
     await mydb.query(queryBody)
     .then(function(result) {
+        //
+        //Rows are empty (Username not found).
+        //
+
+        if (!result || result.length == 0) {
+            return res.status(400).json({
+                success: false,
+                message: "No such user found."
+            })  
+        }
+
+        //
+        //User with username is found. Checking password.
+        //
         if (handleLogin(result[0].userName, req.body.password, result[0].password)) {
             newToken = getRandomToken(10);
             return res.status(200).json({
@@ -46,7 +60,12 @@ router.post('/login', async function(req, res) {
                 message: "Incorrect Credentials."
             })  
         }
+
+
     }, function(err) {
+        //
+        //Error when querying DB
+        //
         return res.status(400).json({
             success: false,
             message: error_Message

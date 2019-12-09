@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { useAuth } from '../../Context/authContext';
+import getAuthToken from '../../Services/authToken';
 
 export default function Login(props) {
   //Login Form
@@ -15,7 +15,6 @@ export default function Login(props) {
 
 
   const visible = false;
-  const authToken = useAuth();
   
   //Login
   function handleLoginSubmit(event) {
@@ -130,11 +129,11 @@ export default function Login(props) {
             <input type="password" placeholder="Confirm password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}/>
             <br/>
             <input type="checkbox" value="agree" /> 
-            <p class="popup" onClick={handlePopup}>
+            <p className="popup" onClick={handlePopup}>
             Agree with the terms of service
           <span
           
-            class={`popuptext ${visible ? "show" : null}`}
+            className={`popuptext ${visible ? "show" : null}`}
             id="myPopup"
           >
             this is simple terms of service

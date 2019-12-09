@@ -1,7 +1,5 @@
 #user-body #avatar-bg{
     width: 90%;
-    padding-top:;
-    margin-top: ;
     margin-left: 5%;
     border-radius:5px;
 }
@@ -10,7 +8,7 @@
     height: 100vh;
     margin: 0;
     padding: 0;
-    background-image: url("../bg4.jpg");
+    background-image: url("../../Resources/bg4.jpg");
     
 }
 #user-body #nameuser{
