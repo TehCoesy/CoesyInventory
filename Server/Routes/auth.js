@@ -28,8 +28,17 @@ function handleLogin(user, given_pass, saved_pass) {
     }
 }
 
+function saveToken2DB(_token, _userid) {
+    var queryBody = "INSERT INTO Authentication (authToken, userID) VALUES ?";
+    var queryArgs = [[_token, _userid]];
+    mydb.query(queryBody,queryArgs)
+    .then(function(error) {
+        console.log(error); 
+    });
+}
+
 router.post('/login', async function(req, res) {
-    let queryBody = "SELECT * FROM Users WHERE userName = " + mysql.escape(req.body.user);
+    var queryBody = "SELECT * FROM Users WHERE userName = " + mysql.escape(req.body.user);
     //let queryArgs = [[req.user]];
     await mydb.query(queryBody)
     .then(function(result) {
@@ -49,6 +58,7 @@ router.post('/login', async function(req, res) {
         //
         if (handleLogin(result[0].userName, req.body.password, result[0].password)) {
             newToken = getRandomToken(10);
+            saveToken2DB(newToken,result[0].userName);
             return res.status(200).json({
                 success: true,
                 message: "Successful Login.",

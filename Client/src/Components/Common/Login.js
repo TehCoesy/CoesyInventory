@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Login.css";
 import getAuthToken from '../../Services/authToken';
+import { Redirect } from 'react-router-dom';
+import { handleLoginSubmit } from './LoginOperation';
 
 export default function Login(props) {
   //Login Form
@@ -15,47 +17,6 @@ export default function Login(props) {
 
 
   const visible = false;
-  
-  //Login
-  function handleLoginSubmit(event) {
-    event.preventDefault();
-    if (validateLoginForm()) {
-      processLogin();
-    } else {
-      alert("Invalid form! Please check for errors");
-    }
-  }
-
-  function validateLoginForm() {
-    return loginPassword.length > 0 && loginUsername.length > 0;
-  }
-
-  async function processLogin() {
-    const url = 'http://localhost:5000/auth/login';
-    const options = {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user: loginUsername,
-        password: loginPassword
-      })
-    }
-
-    await fetch(url, options)
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-
-        if (response.success) {
-          localStorage.setItem('authToken', response.myToken);
-        }
-        
-        alert(response.message);
-    })
-  } 
 
   //Register
   function handleRegisterSubmit(event) {
@@ -114,6 +75,13 @@ export default function Login(props) {
   }
 
   //Render
+  //Redirect to User Home when logged in (authToken)
+  if (getAuthToken()) {
+    return (
+      <Redirect to='/user' />
+    )
+  }
+
   return (
       <div className="loginmom">
         <div id="box">
@@ -143,7 +111,7 @@ export default function Login(props) {
         </div>
         <div id="or">OR</div>
         <div id="login">
-          <form onSubmit={e => handleLoginSubmit(e)}>
+          <form onSubmit={e => handleLoginSubmit(e, loginUsername, loginPassword)}>
             <h1>Login</h1>
             <input type="text" value={loginUsername} name="login-username" placeholder="Usename / Email" onChange={e => setLoginUserName(e.target.value)}/>
             <br />

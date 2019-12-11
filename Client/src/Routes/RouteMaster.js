@@ -1,6 +1,7 @@
 import Login from '../Components/Common/Login';
-import InventoryManagement from '../Components/Users/InventoryManagement';
-import Home from '../Components/Common/Home';
+import InventoryManagement from '../Components/Management/InventoryManagement';
+import CreateNewInventory from '../Components/Users/CreateNewInventory';
+import UserHome from '../Components/Users/UserHome';
 import User from '../Components/Users/User';
 
 export default {
@@ -10,22 +11,29 @@ export default {
         exact: true,
         requireAuth: false
     },
+
+    user: {
+        path: '/user',
+        component: User,
+        exact: true,
+        requireAuth: true
+    },
+    newInventory: {
+        path: '/newInventory',
+        component: CreateNewInventory,
+        exact: true,
+        requireAuth: true
+    },
     inventory: {
         path: '/inventory',
         component: InventoryManagement,
         exact: true,
         requireAuth: true
     },
-    home: {
-        path: '/home',
-        component: Home,
-        exact: true,
-        requireAuth: false
-    },
-    user: {
-        path: '/user',
-        component: User,
+    userHome: {
+        path: '/userHome',
+        component: UserHome,
         exact: true,
         requireAuth: true
-    }
+    },
 }
