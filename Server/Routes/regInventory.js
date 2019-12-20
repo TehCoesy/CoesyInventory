@@ -4,14 +4,14 @@ const mysql = require('mysql');
 
 const router = new express.Router();
 
-router.post('/addItem', async function(req, res) {
-    var queryBody = "INSERT INTO Items (itemName, itemDescription, itemCount, inventoryID) VALUES ?";
-    var queryArgs = [[req.itemName, req.itemDesc, req.count, reg.inventoryID]];
-    mydb(queryBody, queryArgs)
+router.post('/newInventory', async function(req, res) {
+    var queryBody = "INSERT INTO Inventory (organizationName, organizationDescription) VALUES ?";
+    var queryArgs = [[req.body.organizationName, req.body.organizationDesc]];
+    mydb.query(queryBody, queryArgs)
     .then(function(result) {
         return res.status(200).json({
             status: 200,
-            success: false,
+            success: true,
             message: "QueryDB Success"
         })
     }, function(error) {
@@ -23,19 +23,9 @@ router.post('/addItem', async function(req, res) {
     })
 })
 
-router.post('/deleteItem', async function(req, res) {
-    var queryBody = "DELETE FROM Items WHERE itemID = " + mysql.escape(req.body.itemID);
-    mydb(queryBody)
-    .then(function(result) {
-        
-    }, function(error) {
-
-    })
-})
-
-router.post('/fetchAll', async function (req, res) {
-    var queryBody = "SELECT * FROM Items WHERE inventoryID = " + mysql.escape(req.body.inventoryID);
-    mydb(queryBody)
+router.post('/getAll', async function(req, res) {
+    var queryBody = "SELECT * FROM Inventory";
+    mydb.query(queryBody)
     .then(function(result) {
         return res.status(200).json({
             status: 200,

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./Login.css";
-import getAuthToken from '../../Services/authToken';
+import { getAuthToken } from '../../Services/authToken';
 import { Redirect } from 'react-router-dom';
-import { handleLoginSubmit } from './LoginOperation';
+import { handleLoginSubmit, handleRegisterSubmit } from './LoginOperation';
 
 export default function Login(props) {
   //Login Form
@@ -18,63 +18,24 @@ export default function Login(props) {
 
   const visible = false;
 
-  //Register
-  function handleRegisterSubmit(event) {
+  function handleLoginSubmitE(event) {
     event.preventDefault();
-    if (validateRegisterForm()) {
-      processRegister()
-    } else {
-      alert("Invalid Register Form!");
-    }
+    handleLoginSubmit(loginUsername, loginPassword)
   }
 
-  function validateRegisterForm() {
-    var registerValid = true;
-    if (registerUsername.length <= 0) {
-      registerValid = false;
+  function handleRegisterSubmitE(event) {
+    event.preventDefault();
+    var input = {
+      userName: registerUsername,
+      password: registerPassword,
+      password2: confirmPassword,
+      email: registerEmail,
     }
-    if (registerPassword.length <= 0) {
-      registerValid = false;
-    }
-    if (registerEmail <= 0) {
-      registerValid = false;
-    }
-    if (confirmPassword <= 0 || confirmPassword !== registerPassword) {
-      registerValid = false;
-    }
-
-    return registerValid;
-  }
-
-  async function processRegister() {
-    const url = 'http://localhost:5000/register/new_acc';
-    const options = {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        regUsername: registerUsername,
-        regPassword: registerPassword,
-        regEmail: registerEmail
-      })
-    }
-
-    await fetch(url, options)
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-        alert(response.message);
-    })
-  }
-
-  //Popup
-  function handlePopup() {
-
+    handleRegisterSubmit(input);
   }
 
   //Render
+
   //Redirect to User Home when logged in (authToken)
   if (getAuthToken()) {
     return (
@@ -97,7 +58,7 @@ export default function Login(props) {
             <input type="password" placeholder="Confirm password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}/>
             <br/>
             <input type="checkbox" value="agree" /> 
-            <p className="popup" onClick={handlePopup}>
+            <p className="popup">
             Agree with the terms of service
           <span
           
@@ -106,12 +67,12 @@ export default function Login(props) {
           >
             this is simple terms of service
           </span></p>
-            <button id="signup-btn" onClick={handleRegisterSubmit}>Sign up!</button>
+            <button id="signup-btn" onClick={e => handleRegisterSubmitE(e)}>Sign up!</button>
           </form>
         </div>
         <div id="or">OR</div>
         <div id="login">
-          <form onSubmit={e => handleLoginSubmit(e, loginUsername, loginPassword)}>
+          <form onSubmit={e => handleLoginSubmitE(e)}>
             <h1>Login</h1>
             <input type="text" value={loginUsername} name="login-username" placeholder="Usename / Email" onChange={e => setLoginUserName(e.target.value)}/>
             <br />

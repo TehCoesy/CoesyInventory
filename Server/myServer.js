@@ -17,9 +17,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const authRoutes = require('./Routes/auth');
 app.use('/auth', authRoutes);
 
+// token Routes
+const tokenRoutes = require('./Routes/authToken');
+app.use('/token', tokenRoutes);
+
 // register Routes
 const regRoutes = require('./Routes/register');
 app.use('/register', regRoutes);
+
+// regInventory Routes
+
+const regInvRoutes = require('./Routes/regInventory');
+app.use('/regInventory', regInvRoutes);
 
 // inventory Routes
 //const inventoryRoutes = require('./Routes/inventory');

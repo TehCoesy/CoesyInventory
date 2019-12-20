@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DashBoard from './UserComponents/Dashboard';
+import post from '../../Services/expressService';
 
 export default function CreateNewInventory() {
+    const [organizationName, setOrgName] = useState("");
+    const [organizationDesc, setOrdDesc] = useState("");
+
+    function validateForm() {
+        return true;
+    }
+
+    function handleNewOrganization(event) {
+        event.preventDefault();
+        post('/regInventory/newInventory', { organizationName: organizationName, organizationDesc: organizationDesc})
+        .then(function(result) {
+            alert(result.message);
+        }, function(error) {
+            alert(error.message); 
+        })
+    }
+
     return (
         <div>
-            <DashBoard/>
+            Create new Inventory here
+            <form>
+                <input type="text" placeholder="Organization Name" value={organizationName} onChange={e => setOrgName(e.target.value)}/>
+                <button onClick={e => handleNewOrganization(e)}>Submit</button>
+            </form>
         </div>
     )
 }

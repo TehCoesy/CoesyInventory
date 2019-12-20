@@ -29,11 +29,40 @@ function handleLogin(user, given_pass, saved_pass) {
 }
 
 function saveToken2DB(_token, _userid) {
-    var queryBody = "INSERT INTO Authentication (authToken, userID) VALUES ?";
-    var queryArgs = [[_token, _userid]];
-    mydb.query(queryBody,queryArgs)
-    .then(function(error) {
-        console.log(error); 
+    checkForExistingToken(_token, _userid, (_token, _userid) => {
+        var queryBody = "INSERT INTO Authentication (authToken, userID) VALUES ?";
+        var queryArgs = [[_token, _userid]];
+        mydb.query(queryBody,queryArgs)
+        .then(function(result) {
+
+        }, function(error) {
+            console.log(error);
+        })
+    });
+}
+
+function checkForExistingToken(_token, _userid, _callback) {
+    var queryBody = "SELECT * FROM Authentication WHERE userID = " + mysql.escape(_userid);
+    mydb.query(queryBody)
+    .then(function(result) {
+        if (result.length !== 0) {
+            console.log(result.length);
+            deleteExistingToken(_token, _userid, _callback);
+        } else {
+            _callback(_token, _userid);
+        }
+    }, function(error) {
+        console.log(error);
+    });
+}
+
+function deleteExistingToken(_token, _userid, _callback) {
+    var queryBody = "DELETE FROM Authentication WHERE userID = " + mysql.escape(_userid);
+    mydb.query(queryBody)
+    .then(function(result) {
+        _callback(_token, _userid);
+    }, function(error) {
+        console.log(error);
     });
 }
 
@@ -58,11 +87,11 @@ router.post('/login', async function(req, res) {
         //
         if (handleLogin(result[0].userName, req.body.password, result[0].password)) {
             newToken = getRandomToken(10);
-            saveToken2DB(newToken,result[0].userName);
+            saveToken2DB(newToken,result[0].userID);
             return res.status(200).json({
                 success: true,
                 message: "Successful Login.",
-                myToken: newToken 
+                myToken: newToken,
             });
         } else {
             return res.status(400).json({
