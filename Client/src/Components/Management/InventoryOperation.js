@@ -1,19 +1,19 @@
 import post from '../../Services/expressService';
 
-export function getManagerInventory() {
-    post('/inventory/getInventoryID')
+export function addItem(itemName, itemCount, itemDesc) {
+    post('/inventory/additem', { name: itemName, count: itemCount, desc: itemDesc})
     .then(function(result) {
-        return result.inventoryID;
+        alert(result.message);
     }, function(error) {
-        return null;
+        alert(error.message);
     })
 }
 
-export function refresh(id) {
-    post('/inventory/fetchAll', { inventoryID: id})
+export function deleteItem() {
+    post('/inventory/deleteitem', { name: itemName, count: itemCount})
     .then(function(result) {
-
+        alert(result.message);
     }, function(error) {
-        
-    }) 
+        alert(error.message);
+    })
 }

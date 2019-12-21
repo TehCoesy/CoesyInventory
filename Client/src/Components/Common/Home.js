@@ -8,10 +8,13 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1 id="hland">INVENTORY MANAGEMENT</h1>
+            <div class="homeBody">
+                <div class="mainBody">
+                <h1 id="hland">COESY INVENTORY </h1>
+                <br/>
                  <p id="pland">easiest, fastest, most reliable</p>
-                 <button id="btnland" onClick={(e) => {this.openLogin(e)}}>Start managing</button>
+                 <button id="btnland" onClick={(e) => {this.openLogin(e)}}>Get Started</button>
+                </div>
             </div>
         )
     }

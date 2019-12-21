@@ -1,0 +1,56 @@
+.homeBody {
+    width: 100vw;
+    height: 100vh;
+  
+    background: linear-gradient(-70deg,  rgb(91, 60, 231), rgb(35, 166, 213), rgb(34, 212, 171));
+    background-size: 400% 400%;
+    position: relative;
+    animation: change 10s ease-in-out infinite;
+}
+.mainBody {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    color: azure;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: bold;
+    border-radius: 2px;
+}
+.mainBody h1 {
+    font-size: 78px;
+}
+.mainBody button {
+    margin-top: 10px;
+    margin-bottom: 28px;
+    width: 220px;
+    height: 42px;
+    border: none;
+    border-radius: 20px;
+    background: azure;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: 0.2 ease;
+    cursor: pointer;
+    color: darkslategrey;
+    
+  }
+  
+.mainBody button:hover {
+    background-color: #555555;
+    color: white;
+    transition: 0.2s ease;
+  }
+
+@keyframes change {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}

@@ -2,13 +2,13 @@
   width: 100vw;
   height: 100vh;
 
-  background-image: url("../../Resources/bg2.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: linear-gradient(-70deg,  rgb(91, 60, 231), rgb(35, 166, 213), rgb(34, 212, 171));
   display: flex;
   justify-content: center;
   align-items: center;
+  background-size: 400% 400%;
+  position: relative;
+  animation: change 10s ease-in-out infinite;
 }
 
 .loginmom #box{
@@ -23,6 +23,7 @@
     display: flex;
     position: relative;
     
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 .loginmom #signup{
@@ -108,13 +109,13 @@
 }
 
 .loginmom button
-{
+{ 
     margin-bottom: 28px;
     width: 120px;
     height: 32px;
     border: none;
     border-radius: 5px;
-    background: rgb(0, 118, 148);
+    background: rgb(38, 87, 99);
     font-weight: 500;
     text-transform: uppercase;
     transition: 0.2 ease;
@@ -183,3 +184,14 @@
     from {opacity: 0;}
     to {opacity:1 ;}
   }
+  @keyframes change {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}

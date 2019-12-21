@@ -10,17 +10,13 @@ export default function UserHome() {
             <div id='cssmenu'>
     <ul>
    <li><a href='#'>Contact</a></li>
-   <li><a href='#'>New</a></li>
+   <li><a href="http://localhost:3000/Export" target='iframe-page'>Export items</a></li>
+   <li><a href="http://localhost:3000/Import" target='iframe-page'>Import items</a></li>
     <li ><a href="http://localhost:3000/inventory" target='iframe-page'>Products</a></li>
-    <li class='active'><a href="http://localhost:3000/newInventory" target='iframe-page'>New Inventory</a></li>
+    <li ><a href="http://localhost:3000/newInventory" target='iframe-page'>New Inventory</a></li>
     </ul>
     </div>
     <iframe id="iframe" name="iframe-page"> ggg</iframe>
         </div>
     )
-}
-
-function confirmAuthTokenE(event) {
-    event.preventDefault();
-    confirmAuthToken();
 }

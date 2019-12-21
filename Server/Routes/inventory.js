@@ -71,4 +71,31 @@ router.post('/fetchAll', async function (req, res) {
     })
 })
 
+router.post('/check', async function(req, res) {
+    var queryBody = "SELECT * FROM Inventory WHERE inventoryID = (SELECT inventoryID FROM Users WHERE userID = (SELECT userID FROM Authentication WHERE authToken = " + mysql.escape(req.body.authToken) + "))";
+
+    mydb.query(queryBody)
+    .then(function(result) {
+        if (result.length != 0) {
+            return res.status(200).json({
+                status: 200,
+                success: false,
+                message: "You already registered in an Inventory."
+            })
+        } else {
+            return res.status(200).json({
+                status: 200,
+                success: true,
+                message: "Available."
+            })
+        }
+    }, function(err) {
+        return res.status(400).json({
+            status: 400,
+            success: false,
+            message: "DatabaseError"
+        })
+    })
+})
+
 module.exports = router;
