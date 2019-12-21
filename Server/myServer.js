@@ -31,8 +31,8 @@ const regInvRoutes = require('./Routes/regInventory');
 app.use('/regInventory', regInvRoutes);
 
 // inventory Routes
-//const inventoryRoutes = require('./Routes/inventory');
-//app.use('/inventory', inventoryRoutes);
+const inventoryRoutes = require('./Routes/inventory');
+app.use('/inventory', inventoryRoutes);
 
 app.get('/express_backend', (req, res) => {
     res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });

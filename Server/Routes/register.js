@@ -28,6 +28,7 @@ router.post('/new_acc', async function handleRegister(req, res) {
         } else {
             error_Message = "Failure to register (QueryDB).";
         }
+        console.log(err);
         return res.status(400).json({
             success: false,
             message: error_Message

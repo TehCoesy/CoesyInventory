@@ -4,8 +4,12 @@ const mysql = require('mysql');
 
 const router = new express.Router();
 
+function firstAdmin(authToken, inventoryID) {
+    var queryBody = ""
+}
+
 router.post('/newInventory', async function(req, res) {
-    var queryBody = "INSERT INTO Inventory (organizationName, organizationDescription) VALUES ?";
+    var queryBody = "INSERT INTO Inventory (organizationName, organizationDescription) VALUES ?";   
     var queryArgs = [[req.body.organizationName, req.body.organizationDesc]];
     mydb.query(queryBody, queryArgs)
     .then(function(result) {

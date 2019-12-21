@@ -39,7 +39,7 @@ async function processLogin(_username, _password) {
 }
 
 //Register
-export function handleRegisterSubmit( input) {
+export function handleRegisterSubmit(input) {
   if (validateRegisterForm(input)) {
     processRegister(input);
   } else {

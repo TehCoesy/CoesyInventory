@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DashBoard from './UserComponents/Dashboard';
 import post from '../../Services/expressService';
+import { getAuthToken } from '../../Services/authToken';
 
 export default function CreateNewInventory() {
     const [organizationName, setOrgName] = useState("");
@@ -12,7 +13,7 @@ export default function CreateNewInventory() {
 
     function handleNewOrganization(event) {
         event.preventDefault();
-        post('/regInventory/newInventory', { organizationName: organizationName, organizationDesc: organizationDesc})
+        post('/regInventory/newInventory', { organizationName: organizationName, organizationDesc: organizationDesc, authToken: getAuthToken()})
         .then(function(result) {
             alert(result.message);
         }, function(error) {

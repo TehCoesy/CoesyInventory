@@ -5,7 +5,7 @@ const pool = mysql.createPool({
     user     : 'root',
     password : '1234',
     database : 'myinventory',
-    port     : 3312
+    port     : 3306
 });
 
 module.exports = {
@@ -28,6 +28,7 @@ module.exports = {
                 //console.log(rows);
                 if (err) {
                     reject(err);
+                    console.log(err);
                 } else {
                     resolve(rows);
                 }
