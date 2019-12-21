@@ -44,7 +44,7 @@ export default function Login(props) {
   //Redirect to User Home when logged in (authToken)
   if (getAuthToken()) {
     return (
-      <Redirect to='/user' />
+      <Redirect to='/userHome' />
     )
   }
 
