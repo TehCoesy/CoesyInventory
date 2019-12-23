@@ -18,7 +18,7 @@ export function deleteItem(_itemID, _itemCount) {
 }
 
 export function searchItem(_itemList, _key) {
-    
+    return _itemList.filter((x) => x.itemName.toLowerCase().includes(_key.toLowerCase()))
 }
 
 export function refresh() {

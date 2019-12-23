@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import  './InventoryManagement.css';
-import { addItem, deleteItem, refresh } from './InventoryOperation';
+import { addItem, deleteItem, refresh, searchItem } from './InventoryOperation';
 
 
 export default function InventoryManagement() {
+  const [searchName, setSearchName] = useState("");
   const [itemID, setItemID] = useState(0);
   const [itemName, setItemName] = useState("");
   const [itemCount, setItemCount] = useState(0);
@@ -11,11 +12,30 @@ export default function InventoryManagement() {
   const [itemList, setItemList] = useState([]);
   const [currentList, setCurrentList] = useState([]);
 
+  useEffect(() => {
+    refresh()
+    .then(function(result) {
+      setCurrentList(result);
+      setItemList(result);
+    })
+  }, [])
+
+  function refreshC() {
+    refresh()
+    .then(function(result) {
+      setCurrentList(result);
+      setItemList(result);
+    }, function(error) {
+
+    })
+  }
+
   function refreshE(event) {
     event.preventDefault();
     refresh()
     .then(function(result) {
       setCurrentList(result);
+      setItemList(result);
     }, function(error) {
 
     })
@@ -24,11 +44,23 @@ export default function InventoryManagement() {
   function addItemE(event) {
     event.preventDefault();
     addItem(itemName, itemCount, itemDesc);
+    refreshC();
   }
 
   function deleteItemE(event) {
     event.preventDefault();
     deleteItem(itemID, itemCount);
+    refreshC();
+  }
+
+  function searchItemE(event) {
+    event.preventDefault();
+    setCurrentList(searchItem(itemList, searchName))
+  }
+
+  function clearSearchE(event) {
+    event.preventDefault();
+    setCurrentList(itemList);
   }
 
   return (
@@ -60,13 +92,13 @@ export default function InventoryManagement() {
    <div align="center">
      <div id="search">
      <form id="form-box">
-           <input type="text"  placeholder="Item ID/ Item name" />
+           <input type="text"  placeholder="Item ID/ Item name" value={searchName} onChange={e => setSearchName(e.target.value)}/>
          
          </form>
          <br/>
-        <div className="button_cont" align="center"><button className="example_e">Search item</button></div>
+        <div className="button_cont" align="center"><button className="example_e" onClick={e => searchItemE(e)}>Search item</button></div>
       
-       <div className="button_cont" align="center"><button className="example_e">Remove search</button></div>
+       <div className="button_cont" align="center"><button className="example_e" onClick={e => clearSearchE(e)}>Remove search</button></div>
        </div>
        
    
