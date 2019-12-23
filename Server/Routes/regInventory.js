@@ -1,6 +1,7 @@
 const express = require('express');
 const mydb = require('../Middleware/myDB');
 const mysql = require('mysql');
+const userAuth = require('../Middleware/userAuthentication');
 
 const router = new express.Router();
 
@@ -8,7 +9,7 @@ function firstAdmin(authToken, inventoryName, res) {
     var queryBody = "SELECT * FROM Inventory WHERE organizationName = " + mysql.escape(inventoryName);
     mydb.query(queryBody)
     .then(function(result) {
-        queryBody = "UPDATE Users" + " " +
+        queryBody = "UPDATE Users " +
         "SET organizationID = " + mysql.escape(result[0].inventoryID) + " " +
         "WHERE userID = (SELECT userID FROM Authentication WHERE authToken = " + mysql.escape(authToken) + ")";
         mydb.query(queryBody)

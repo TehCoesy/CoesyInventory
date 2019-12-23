@@ -1,16 +1,35 @@
 import React, { useState } from 'react';
-import  './InventoryManagement.css'
+import  './InventoryManagement.css';
+import { addItem, deleteItem } from './InventoryOperation';
+
 
 export default function InventoryManagement() {
+  const [itemID, setItemID] = useState(0);
   const [itemName, setItemName] = useState("");
   const [itemCount, setItemCount] = useState(0);
   const [itemDesc, setItemDesc] = useState("");
+  const [itemList, setItemList] = useState([]);
+  const [currentList, setCurrentList] = useState([]);
+
+  function refresh() {
+  
+  }
+
+  function addItemE(event) {
+    event.preventDefault();
+    addItem(itemName, itemCount, itemDesc);
+  }
+
+  function deleteItemE(event) {
+    event.preventDefault();
+    deleteItem(itemID, itemCount);
+  }
 
   return (
     <div id="product-body">
       
            <div id="table">
-       <table class="content-table">
+       <table className="content-table">
  <thead>
    <tr>
      <th>ID</th>
@@ -26,7 +45,7 @@ export default function InventoryManagement() {
      <td>10</td>
      <td>ferrari xxx</td>
    </tr>
-   <tr class="active-row">
+   <tr className="active-row">
      <td>2</td>
      <td>laptop</td>
      <td>1000</td>
@@ -55,9 +74,9 @@ export default function InventoryManagement() {
          
          </form>
          <br/>
-        <div class="button_cont" align="center"><a class="example_e">Search item</a></div>
+        <div className="button_cont" align="center"><button className="example_e">Search item</button></div>
       
-       <div class="button_cont" align="center"><a class="example_e">Remove search</a></div>
+       <div className="button_cont" align="center"><button className="example_e">Remove search</button></div>
        </div>
        
    
@@ -66,21 +85,21 @@ export default function InventoryManagement() {
    <div align="center">
      <p></p>
      <form id="form-box">
-           <input type="number"  placeholder="Item ID" />
+           <input type="number"  placeholder="Item ID" value={itemID} onChange={e => setItemID(e.target.value)}/>
            <br />
-           <input type="text" placeholder="Item Name" />
+           <input type="text" placeholder="Item Name" value={itemName} onChange={e => setItemName(e.target.value)}/>
            <br />
-           <input type="number" placeholder="Amount" />
+           <input type="number" placeholder="Amount" value={itemCount} onChange={e => setItemCount(e.target.value)}/>
            <br/>
-           <input type="text" placeholder="Item Description" />
+           <input type="text" placeholder="Item Description" value={itemDesc} onChange={e => setItemDesc(e.target.value)}/>
            <br/>
          </form>
    <br></br>
    <br></br>
    </div>
-   <div class="button_cont" align="center"><a class="example_e">Add item</a></div>
-   <div class="button_cont" align="center"><a class="example_e">Delete item</a></div>
-   <div class="button_cont" align="center"><a class="example_e">Refresh</a></div>
+   <div class="button_cont" align="center"><button className="example_e" onClick={e => addItemE(e)}>Add item</button></div>
+   <div class="button_cont" align="center"><button className="example_e" onClick={e => deleteItemE(e)}>Delete item</button></div>
+   <div class="button_cont" align="center"><button className="example_e">Refresh</button></div>
 </div>
    </div>
        

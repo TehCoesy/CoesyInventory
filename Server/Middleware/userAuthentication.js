@@ -2,7 +2,8 @@ const mydb = require('./myDB');
 const mysql = require('mysql');
 
 function fetchUserID(_authToken) {
-    return Promise(function(resolve, reject) {
+    console.log(_authToken)
+    return new Promise(function(resolve, reject) {
         var queryBody = "SELECT userID FROM Authentication WHERE authToken = " + mysql.escape(_authToken);
         mydb.query(queryBody)
         .then(function(result) {
@@ -14,10 +15,19 @@ function fetchUserID(_authToken) {
 }
 
 function fetchInventoryID(_authToken) {
-    return Promise(function(resolve, reject) {
-        fetchUserID(_authToken)
-        .then(function(result) {
-            var queryBody = "SELECT inventoryID FROM"
+    console.log(_authToken)
+    return new Promise(function(resolve, reject) {
+        var queryBody = "SELECT organizationID FROM Users WHERE userID = (SELECT userID FROM Authentication WHERE authToken = " + mysql.escape(_authToken) + ")";
+            mydb.query(queryBody)
+            .then(function(result) {
+                resolve(result[0].organizationID);
+            }, function(error) {
+                reject(null);
         })
-    })
+    })  
+}
+
+module.exports = {
+    fetchUserID: fetchUserID,
+    fetchInventoryID: fetchInventoryID
 }

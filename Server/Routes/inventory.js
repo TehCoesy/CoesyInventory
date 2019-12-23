@@ -1,99 +1,123 @@
 const express = require('express');
 const mydb = require('../Middleware/myDB');
 const mysql = require('mysql');
+const userAuth = require('../Middleware/userAuthentication');
+const inventoryHelper = require('./inventoryHelper');
 
 const router = new express.Router();
 
-router.post('/getInventoryID', async function(req, res) {
-    var queryBody = "SELECT * FROM Inventory WHERE inventoryID = (SELECT inventoryID FROM Users WHERE userID = (SELECT userID FROM Authentication WHERE authToken = " + mysql.escape(req.body.authToken) + "))";
-    mydb(queryBody, queryArgs)
-    .then(function(result) {
-        return res.status(200).json({
-            status: 200,
-            success: true,
-            message: "QueryDB Success",
-            inventoryID: result[0].inventoryID
-        })
-    }, function(error) {
-        return res.status(400).json({
-            status: 400,
-            success: true,
-            message: "DatabaseError"
-        })
-    })
-})
-
 router.post('/addItem', async function(req, res) {
-    var queryBody = "INSERT INTO Items (itemName, itemDescription, itemCount, inventoryID) VALUES ?";
-    var queryArgs = [[req.itemName, req.itemDesc, req.count, reg.inventoryID]];
-    mydb(queryBody, queryArgs)
+    userAuth.fetchInventoryID(req.body.authToken)
     .then(function(result) {
-        return res.status(200).json({
-            status: 200,
-            success: false,
-            message: "QueryDB Success"
-        })
-    }, function(error) {
-        return res.status(400).json({
-            status: 400,
-            success: false,
-            message: "DatabaseError"
-        })  
-    })
-})
-
-router.post('/deleteItem', async function(req, res) {
-    var queryBody = "DELETE FROM Items WHERE itemID = " + mysql.escape(req.body.itemID);
-    mydb(queryBody)
-    .then(function(result) {
-        
-    }, function(error) {
-
-    })
-})
-
-router.post('/fetchAll', async function (req, res) {
-    var queryBody = "SELECT * FROM Items WHERE inventoryID = " + mysql.escape(req.body.inventoryID);
-    mydb(queryBody)
-    .then(function(result) {
-        return res.status(200).json({
-            status: 200,
-            success: true,
-            message: "QueryDB Success",
-            data: result
-        })
-    }, function(error) {
-        return res.status(400).json({
-            status: 400,
-            success: false,
-            message: "DatabaseError"
-        })  
-    })
-})
-
-router.post('/check', async function(req, res) {
-    var queryBody = "SELECT * FROM Inventory WHERE inventoryID = (SELECT inventoryID FROM Users WHERE userID = (SELECT userID FROM Authentication WHERE authToken = " + mysql.escape(req.body.authToken) + "))";
-
-    mydb.query(queryBody)
-    .then(function(result) {
-        if (result.length != 0) {
-            return res.status(200).json({
-                status: 200,
-                success: false,
-                message: "You already registered in an Inventory."
-            })
-        } else {
+        var queryBody = "INSERT INTO Items (itemName, itemDescription, itemCount, inventoryID) VALUES ?";
+        var queryArgs =[[req.body.name, req.body.desc, req.body.count, result]];
+        mydb.query(queryBody, queryArgs)
+        .then(function(result) {
             return res.status(200).json({
                 status: 200,
                 success: true,
-                message: "Available."
+                message: "QueryDB Success"
+            });
+        }, function(error) {
+            return res.status(400).json({
+                status: 400,
+                success: false,
+                message: "DatabaseError (AddItem)"
             })
-        }
-    }, function(err) {
+        })
+    }, function(error) {
         return res.status(400).json({
             status: 400,
             success: false,
-            message: "DatabaseError"
+            message: "DatabaseError (InventoryID)"
+        })
+    })
+})
+
+
+router.post('/deleteItem', async function(req, res) {
+    userAuth.fetchInventoryID(req.body.authToken)
+    .then(function(result) {
+        console.log(result);
+        inventoryHelper.getItemCount(result, req.body.id)
+        .then(function(result2) {
+            if (req.body.count < result2) {
+                var newValue = result2 - req.body.count;
+                var queryBody = "UPDATE Items " +
+                "SET itemCount = " + mysql.escape(newValue) + " " +
+                "WHERE itemID = " + mysql.escape(req.body.id);
+                mydb.query(queryBody)
+                .then(function(result3) {
+                    return res.status(200).json({
+                        status: 200,
+                        success: true,
+                        message: "QueryDB (UpdateCount) Success"
+                    })
+                }, function(error3) {
+                    return res.status(400).json({
+                        status: 400,
+                        success: false,
+                        message: "DatabaseError (UpdateCount)"
+                    })
+                })
+            } else {
+                var queryBody = "DELETE FROM Items WHERE itemID = " + mysql.escape(req.body.id);
+                mydb.query(queryBody)
+                .then(function(result3) {
+                    return res.status(200).json({
+                        status: 200,
+                        success: true,
+                        message: "QueryDB (DeleteItem) Success"
+                    })
+                }, function(error3) {
+                    console.log(error3);
+                    return res.status(400).json({
+                        status: 400,
+                        success: false,
+                        message: "DatabaseError (DeleteItem)"
+                    })
+                })
+            }
+        }, function(error2) {
+            console.log(error2);
+            return res.status(400).json({
+                status: 400,
+                success: false,
+                message: "DatabaseError (ItemCount)"
+            })
+        })
+    }, function(error) {
+        return res.status(400).json({
+            status: 400,
+            success: false,
+            message: "DatabaseError (FetchItems)"
+        })
+    })
+})
+
+router.post('/fetchAll', async function(req, res) {
+    userAuth.fetchInventoryID(req.body.authToken)
+    .then(function(result) {
+        var queryBody = "SELECT * FROM Items WHERE inventoryID = " + mysql.escape(result);
+        mydb.query(queryBody)
+        .then(function(result) {
+            return res.status(200).json({
+                status: 200,
+                success: true,
+                message: "QueryDB Success"
+            })
+        }, function(error) {
+            return res.status(400).json({
+                status: 400,
+                success: false,
+                message: "DatabaseError (FetchItems)"
+            })
+        })
+    }, function(error) {
+        return res.status(400).json({
+            status: 400,
+            success: false,
+            message: "DatabaseError (InventoryID)"
         })
     })
 })
