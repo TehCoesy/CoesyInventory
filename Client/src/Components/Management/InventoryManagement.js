@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import  './InventoryManagement.css';
-import { addItem, deleteItem } from './InventoryOperation';
+import { addItem, deleteItem, refresh } from './InventoryOperation';
 
 
 export default function InventoryManagement() {
@@ -11,8 +11,14 @@ export default function InventoryManagement() {
   const [itemList, setItemList] = useState([]);
   const [currentList, setCurrentList] = useState([]);
 
-  function refresh() {
-  
+  function refreshE(event) {
+    event.preventDefault();
+    refresh()
+    .then(function(result) {
+      setCurrentList(result);
+    }, function(error) {
+
+    })
   }
 
   function addItemE(event) {
@@ -39,30 +45,14 @@ export default function InventoryManagement() {
    </tr>
  </thead>
  <tbody>
-   <tr>
-     <td>1</td>
-     <td>car</td>
-     <td>10</td>
-     <td>ferrari xxx</td>
-   </tr>
-   <tr className="active-row">
-     <td>2</td>
-     <td>laptop</td>
-     <td>1000</td>
-     <td>Dell xxx</td>
-   </tr>
-   <tr>
-     <td>3</td>
-     <td>item 3</td>
-     <td>xx</td>
-     <td>nothing</td>
-   </tr>
-   <tr>
-     <td>4</td>
-     <td>item 4</td>
-     <td>xx</td>
-     <td>nothing</td>
-   </tr>
+   {currentList.map((row, i) => (
+      <tr key={i}>
+        <td>{row.itemID}</td>
+        <td>{row.itemName}</td>
+        <td>{row.itemCount}</td>
+        <td>{row.itemDescription}</td>
+      </tr>
+   ))}
  </tbody>
 </table>
 </div>
@@ -99,7 +89,7 @@ export default function InventoryManagement() {
    </div>
    <div class="button_cont" align="center"><button className="example_e" onClick={e => addItemE(e)}>Add item</button></div>
    <div class="button_cont" align="center"><button className="example_e" onClick={e => deleteItemE(e)}>Delete item</button></div>
-   <div class="button_cont" align="center"><button className="example_e">Refresh</button></div>
+   <div class="button_cont" align="center"><button className="example_e" onClick={e => refreshE(e)}>Refresh</button></div>
 </div>
    </div>
        

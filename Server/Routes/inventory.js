@@ -104,7 +104,8 @@ router.post('/fetchAll', async function(req, res) {
             return res.status(200).json({
                 status: 200,
                 success: true,
-                message: "QueryDB Success"
+                message: "QueryDB Success",
+                data: result
             })
         }, function(error) {
             return res.status(400).json({
