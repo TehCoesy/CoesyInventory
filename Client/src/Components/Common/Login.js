@@ -74,18 +74,18 @@ export default function Login(props) {
         >
           this is simple terms of service
         </span></p>
-          <button id="signup-btn" onClick={handleRegisterSubmit}>Sign up!</button>
+          <button id="signup-btn" onClick={e => handleRegisterSubmitE(e)}>Sign up!</button>
         </form>
       </div>
       <div id="or">OR</div>
       <div id="login">
-        <form onSubmit={e => handleLoginSubmit(e, loginUsername, loginPassword)}>
+        <form>
           <h1>Login</h1>
           <input type="text" value={loginUsername} name="login-username" placeholder="Usename / Email" onChange={e => setLoginUserName(e.target.value)}/>
           <br />
           <input type="password" value={loginPassword} name="login-password" placeholder="Password" onChange={e => setLoginPassword(e.target.value)}/>
           <br/>
-          <button type="submit" id="login-btn">Login</button>
+          <button id="login-btn"  onClick={e => handleLoginSubmitE(e)}>Login</button>
           <br/>
           <h2>Forgot password </h2>
           <input type="text" name="forgot-username" placeholder="Username / Email" />
